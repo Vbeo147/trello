@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createGlobalStyle } from "styled-components";
+import { RecoilRoot } from "recoil";
 
 const GlobalStyle = createGlobalStyle`
 html,
@@ -130,8 +131,18 @@ table {
 * {
   box-sizing: border-box;
 }
+html {
+  height: 100%;
+  width: 100%;
+}
 body {
   font-family: 'Raleway', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: inherit;
+  width: inherit;
+  background-color: #1F2937;
 }
 a {
   text-decoration: none;
@@ -140,8 +151,8 @@ a {
 `;
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
-  <>
+  <RecoilRoot>
     <GlobalStyle />
     <App />
-  </>
+  </RecoilRoot>
 );
