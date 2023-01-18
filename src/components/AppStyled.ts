@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const A = {
   Container: styled.div`
     background-color: #1076d6;
-    width: 80vh;
+    width: 80vw;
     height: 80vh;
     display: flex;
     justify-content: space-between;
@@ -11,7 +11,7 @@ export const A = {
     padding: 10px 50px;
   `,
   DroppableBox: styled.ul`
-    width: 30%;
+    width: 90%;
     height: 90%;
     background-color: lightgray;
     padding: 15px;
@@ -32,5 +32,17 @@ export const A = {
     &:active {
       border: 2px solid black;
     }
+  `,
+  BoardContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+  `,
+  Title: styled.h1`
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10%;
   `,
 };
