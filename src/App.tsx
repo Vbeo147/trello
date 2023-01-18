@@ -1,66 +1,48 @@
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
-import styled from "styled-components";
-
-const Container = styled.div`
-  background-color: #1076d6;
-  width: 80vh;
-  height: 80vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 50px;
-`;
-
-const DroppableBox = styled.ul`
-  width: 40%;
-  height: 90%;
-  background-color: lightgray;
-  padding: 15px;
-`;
-
-const DraggableBox = styled.li`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  padding: 5px;
-  margin-bottom: 5px;
-  border: 2px solid transparent;
-  transition: border 0.3s ease-in-out;
-  &:hover,
-  &:active {
-    border: 2px solid black;
-  }
-`;
-
-const toDos = ["a", "b", "c", "d", "e", "f"];
+import {
+  DragDropContext,
+  Draggable,
+  DropResult,
+  Droppable,
+} from "react-beautiful-dnd";
+import { A } from "./components/AppStyled";
+import { useRecoilState } from "recoil";
+import { toDoState } from "./atoms";
 
 function App() {
-  const onDragEnd = () => {};
+  const [toDos, setToDos] = useRecoilState(toDoState);
+  const onDragEnd = ({ draggableId, destination, source }: DropResult) => {
+    if (!destination) return;
+    setToDos((oldToDos) => {
+      const toDosCopy = [...oldToDos];
+      toDosCopy.splice(source.index, 1);
+      toDosCopy.splice(destination?.index, 0, draggableId);
+      return toDosCopy;
+    });
+  };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
-      <Container>
+      <A.Container>
         <Droppable droppableId="one">
           {(magic) => (
-            <DroppableBox ref={magic.innerRef} {...magic.droppableProps}>
-              {toDos.map((a, b) => (
-                <Draggable draggableId={a} index={b}>
+            <A.DroppableBox ref={magic.innerRef} {...magic.droppableProps}>
+              {toDos.map((toDo, index) => (
+                <Draggable key={toDo} draggableId={toDo} index={index}>
                   {(magic) => (
-                    <DraggableBox
+                    <A.DraggableBox
                       ref={magic.innerRef}
                       {...magic.draggableProps}
                       {...magic.dragHandleProps}
                     >
-                      {a}
-                    </DraggableBox>
+                      {toDo}
+                    </A.DraggableBox>
                   )}
                 </Draggable>
               ))}
               {magic.placeholder}
-            </DroppableBox>
+            </A.DroppableBox>
           )}
         </Droppable>
-      </Container>
+      </A.Container>
     </DragDropContext>
   );
 }
