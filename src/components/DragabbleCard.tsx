@@ -3,20 +3,22 @@ import { A } from "./AppStyled";
 import React from "react";
 
 interface IDragabbleCardProps {
-  toDo: string;
+  toDoId: number;
+  toDoText: string;
   index: number;
 }
 
-function DragabbleCard({ toDo, index }: IDragabbleCardProps) {
+function DragabbleCard({ toDoText, toDoId, index }: IDragabbleCardProps) {
   return (
-    <Draggable draggableId={toDo} index={index}>
-      {(magic) => (
+    <Draggable draggableId={toDoId + ""} index={index}>
+      {(magic, snapshot) => (
         <A.DraggableBox
+          isDragging={snapshot.isDragging}
           ref={magic.innerRef}
           {...magic.draggableProps}
           {...magic.dragHandleProps}
         >
-          {toDo}
+          {toDoText}
         </A.DraggableBox>
       )}
     </Draggable>

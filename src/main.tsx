@@ -142,7 +142,6 @@ body {
   align-items: center;
   height: inherit;
   width: inherit;
-  background-color: #1F2937;
 }
 a {
   text-decoration: none;

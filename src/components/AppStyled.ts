@@ -14,25 +14,26 @@ export const A = {
     width: 90%;
     height: 90%;
     background-color: lightgray;
-    padding: 15px;
+    padding: 20px;
     overflow-y: auto;
     overflow: hidden;
     transition: background 0.3s ease-in-out;
     background: ${(props) => (props.isDraggingOver ? "pink" : "lightgray")};
   `,
-  DraggableBox: styled.li`
+  DraggableBox: styled.li<{ isDragging: boolean }>`
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 20px;
-    padding: 5px;
+    padding: 6px;
     margin-bottom: 5px;
     border: 2px solid transparent;
     transition: border 0.3s ease-in-out;
     user-select: none;
-    background: white;
-    &:hover,
-    &:active {
+    background: ${(props) => (props.isDragging ? "tomato" : "white")};
+    box-shadow: ${(props) =>
+      props.isDragging ? "0px 2px 5px rgba(0, 0, 0, 0.4)" : "none"};
+    &:hover {
       border: 2px solid black;
     }
   `,
@@ -47,5 +48,15 @@ export const A = {
     font-size: 20px;
     font-weight: bold;
     margin-bottom: 10%;
+  `,
+  Form: styled.form`
+    width: 100%;
+    padding: 5%;
+    input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
   `,
 };
