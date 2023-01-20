@@ -10,10 +10,14 @@ interface IBoardProps {
 function Board({ toDos, boardId }: IBoardProps) {
   return (
     <Droppable droppableId={boardId}>
-      {(magic) => (
+      {(magic, snapshot) => (
         <A.BoardContainer>
           <A.Title>{boardId}</A.Title>
-          <A.DroppableBox ref={magic.innerRef} {...magic.droppableProps}>
+          <A.DroppableBox
+            isDraggingOver={snapshot.isDraggingOver}
+            ref={magic.innerRef}
+            {...magic.droppableProps}
+          >
             {toDos.map((toDo, index) => (
               <DragabbleCard key={toDo} toDo={toDo} index={index} />
             ))}

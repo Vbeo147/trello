@@ -10,13 +10,15 @@ export const A = {
     align-items: center;
     padding: 10px 50px;
   `,
-  DroppableBox: styled.ul`
+  DroppableBox: styled.ul<{ isDraggingOver: boolean }>`
     width: 90%;
     height: 90%;
     background-color: lightgray;
     padding: 15px;
     overflow-y: auto;
     overflow: hidden;
+    transition: background 0.3s ease-in-out;
+    background: ${(props) => (props.isDraggingOver ? "pink" : "lightgray")};
   `,
   DraggableBox: styled.li`
     display: flex;
@@ -28,6 +30,7 @@ export const A = {
     border: 2px solid transparent;
     transition: border 0.3s ease-in-out;
     user-select: none;
+    background: white;
     &:hover,
     &:active {
       border: 2px solid black;
